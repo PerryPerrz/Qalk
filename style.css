@@ -223,3 +223,34 @@ p {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 75%;
+}
+
+td,
+th {
+    border: 1px solid var(--cream);
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: var(--cream);
+}
+
+tr:nth-child(even) {
+    color: var(--green);
+}
+
+tr:nth-child(odd) {
+    background-color: var(--lighter);
+}

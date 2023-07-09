@@ -120,3 +120,67 @@ document.querySelector('.resetBtn').addEventListener('click', function () {
   netSalary.value = 0;
   brutSalary.value = 0;
 });
+
+// Import the schedule
+document.querySelector('.importBtn').addEventListener('click', function () {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'application/json';
+  input.onchange = (event) => {
+    printSchedule(event.target.files[0]);
+  };
+  input.click();
+});
+
+// Function to print the schedule
+function printSchedule(file) {
+  const reader = new FileReader();
+  reader.readAsText(file, 'UTF-8');
+  reader.onload = function (evt) {
+    const data = JSON.parse(evt.target.result);
+    const schedule = data.schedule;
+    const scheduleLength = schedule.length;
+    const scheduleTable = document.querySelector('.scheduleTable');
+    scheduleTable.innerHTML = '';
+    for (let i = 0; i < scheduleLength; i++) {
+      const tr = document.createElement('tr');
+
+      const td = document.createElement('td');
+      td.innerHTML = schedule[i].Week;
+      tr.appendChild(td);
+
+      const td2 = document.createElement('td');
+      td2.innerHTML = schedule[i].Mon;
+      tr.appendChild(td2);
+
+      const td3 = document.createElement('td');
+      td3.innerHTML = schedule[i].Tue;
+      tr.appendChild(td3);
+
+      const td4 = document.createElement('td');
+      td4.innerHTML = schedule[i].Wed;
+      tr.appendChild(td4);
+
+      const td5 = document.createElement('td');
+      td5.innerHTML = schedule[i].Thu;
+      tr.appendChild(td5);
+
+      const td6 = document.createElement('td');
+      td6.innerHTML = schedule[i].Fri;
+      tr.appendChild(td6);
+
+      const td7 = document.createElement('td');
+      td7.innerHTML = schedule[i].Sat;
+      tr.appendChild(td7);
+
+      const td8 = document.createElement('td');
+      td8.innerHTML = schedule[i].Sun;
+      tr.appendChild(td8);
+
+      scheduleTable.appendChild(tr);
+    }
+  }
+  reader.onerror = function (evt) {
+    alert('error reading file');
+  }
+}
