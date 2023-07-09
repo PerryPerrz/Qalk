@@ -83,7 +83,9 @@ p {
     justify-content: space-between;
 }
 
+.resetBtn,
 .exportBtn,
+.loadBtn,
 .importBtn {
     width: 20%;
     border: none;
@@ -97,7 +99,9 @@ p {
     transition: all 0.3s ease;
 }
 
+.resetBtn:hover,
 .exportBtn:hover,
+.loadBtn:hover,
 .importBtn:hover {
     background-color: var(--lightgreen);
 }
@@ -128,7 +132,9 @@ p {
         font-size: 18px;
     }
 
+    .resetBtn,
     .exportBtn,
+    .loadBtn,
     .importBtn {
         padding: 9px 0;
         font-size: 18px;
