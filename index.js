@@ -128,6 +128,7 @@ document.querySelector('.importBtn').addEventListener('click', function () {
   input.accept = 'application/json';
   input.onchange = (event) => {
     printSchedule(event.target.files[0]);
+    loadSchedule(event.target.files[0]);
   };
   input.click();
 });
@@ -182,5 +183,62 @@ function printSchedule(file) {
   }
   reader.onerror = function (evt) {
     alert('error reading file');
+  }
+}
+
+// Function who load the datas of the schedule
+function loadSchedule(file) {
+  // Calculate the number of hours worked
+  const reader = new FileReader();
+  reader.readAsText(file, 'UTF-8');
+  reader.onload = function (evt) {
+    const data = JSON.parse(evt.target.result);
+    const schedule = data.schedule;
+    const scheduleLength = schedule.length;
+
+    let nbHours = 0;
+    let days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    let offDays = "";
+    let nbOffDays = 0;
+    let date = "";
+
+    for (let i = 0; i < scheduleLength; i++) {
+      for (let j = 0; j < days.length; j++) {
+        date = schedule[i].Week;
+
+        let dayHours = schedule[i][days[j]];
+
+        if (dayHours !== '' && dayHours !== 'OFF') {
+          hoursWorked = dayHours.split('-');
+
+          // Replace all the ":" by "." to be able to calculate the hours
+          hoursWorked[0] = hoursWorked[0].replace(':', '.');
+          hoursWorked[1] = hoursWorked[1].replace(':', '.');
+
+          // Calculate the hours worked
+          hoursWorked = hoursWorked[1] - hoursWorked[0];
+
+          // Don't take numbers after the comma
+          hoursWorked = Math.trunc(hoursWorked);
+
+          nbHours += hoursWorked;
+        }
+
+        if (dayHours == 'OFF') {
+          offDays += date + " : " + days[j];
+          nbOffDays++;
+        }
+      }
+    }
+
+    const totHoursSchedule = document.querySelector('.totHoursSchedule'),
+      totOffDays = document.querySelector('.totOffDays'),
+      listOffDays = document.querySelector('.listOffDays');
+
+    totHoursSchedule.innerHTML = 'Nombre d\'heures travaillées : ' + nbHours + 'h';
+    totOffDays.innerHTML = 'Nombre de jours \'OFF\' : ' + nbOffDays;
+    listOffDays.innerHTML = 'Jours \'OFF\' : ' + offDays;
+
+    //calculate();
   }
 }

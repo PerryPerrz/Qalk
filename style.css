@@ -254,3 +254,13 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
     background-color: var(--lighter);
 }
+
+.scheduleDatas {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.scheduleDatas>span {
+    margin-bottom: 10px;
+}
