@@ -239,6 +239,9 @@ function loadSchedule(file) {
       totOffDays = document.querySelector('.totOffDays'),
       listOffDays = document.querySelector('.listOffDays');
 
+    // Clear the list of off days
+    listOffDays.innerHTML = '';
+
     totHoursSchedule.innerHTML = 'Nombre d\'heures travaillées : ' + nbHours + 'h';
     totOffDays.innerHTML = 'Nombre de jours \'OFF\' : ' + nbOffDays;
 
@@ -265,6 +268,6 @@ function calculateSalarySchedule(nbHours) {
   const brutSalarySchedule = document.querySelector('.brutSalarySchedule'),
     netSalarySchedule = document.querySelector('.netSalarySchedule');
 
-  brutSalarySchedule.innerHTML = 'Salaire brut : ' + (brutHourValue * nbHours) + '€';
-  netSalarySchedule.innerHTML = 'Salaire net : ' + (netHourValue * nbHours) + '€';
+  brutSalarySchedule.innerHTML = 'Salaire brut : ' + (brutHour.value * nbHours) + '€';
+  netSalarySchedule.innerHTML = 'Salaire net : ' + (netHour.value * nbHours) + '€';
 }
