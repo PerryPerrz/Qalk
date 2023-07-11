@@ -259,8 +259,19 @@ tr:nth-child(odd) {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    font-size: 18px;
 }
 
 .scheduleDatas>span {
+    margin-bottom: 10px;
+}
+
+.scheduleDatas .listOffDays {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.offDay {
     margin-bottom: 10px;
 }

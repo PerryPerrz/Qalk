@@ -146,6 +146,10 @@ function printSchedule(file) {
     for (let i = 0; i < scheduleLength; i++) {
       const tr = document.createElement('tr');
 
+      const th = document.createElement('th');
+      th.innerHTML = 'Semaine ' + (i + 1);
+      tr.appendChild(th);
+
       const td = document.createElement('td');
       td.innerHTML = schedule[i].Week;
       tr.appendChild(td);
@@ -225,7 +229,7 @@ function loadSchedule(file) {
         }
 
         if (dayHours == 'OFF') {
-          offDays += date + " : " + days[j];
+          offDays += date + " : " + days[j] + ",";
           nbOffDays++;
         }
       }
@@ -237,7 +241,21 @@ function loadSchedule(file) {
 
     totHoursSchedule.innerHTML = 'Nombre d\'heures travaillées : ' + nbHours + 'h';
     totOffDays.innerHTML = 'Nombre de jours \'OFF\' : ' + nbOffDays;
-    listOffDays.innerHTML = 'Jours \'OFF\' : ' + offDays;
+
+    //For each day off, create a span, add a class and add it to the list
+    const offDaysArray = offDays.split(',');
+
+    const span = document.createElement('span');
+    span.classList.add('offDay');
+    span.innerHTML = "Jours \'OFF\' :"
+    listOffDays.appendChild(span);
+
+    for (let i = 0; i < offDaysArray.length - 1; i++) {
+      const span = document.createElement('span');
+      span.classList.add('offDay');
+      span.innerHTML = offDaysArray[i];
+      listOffDays.appendChild(span);
+    }
 
     //calculate();
   }
