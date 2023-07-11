@@ -257,6 +257,14 @@ function loadSchedule(file) {
       listOffDays.appendChild(span);
     }
 
-    //calculate();
+    calculateSalarySchedule(nbHours);
   }
+}
+
+function calculateSalarySchedule(nbHours) {
+  const brutSalarySchedule = document.querySelector('.brutSalarySchedule'),
+    netSalarySchedule = document.querySelector('.netSalarySchedule');
+
+  brutSalarySchedule.innerHTML = 'Salaire brut : ' + (brutHourValue * nbHours) + '€';
+  netSalarySchedule.innerHTML = 'Salaire net : ' + (netHourValue * nbHours) + '€';
 }
